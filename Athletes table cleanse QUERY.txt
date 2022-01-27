@@ -1,0 +1,20 @@
+-- CLEANSE ATHLETE EVENT RESULTS TABLE --
+SELECT [ID]
+      ,[Name]
+      ,
+	  CASE WHEN [Sex] = 'M' THEN 'MALE' 
+	  ELSE 'FEMALE' END AS SEX
+      ,[Age]
+      ,[Height]
+      ,[Weight]
+      ,[NOC] AS 'NATION CODE'
+	  ,LEFT (Games, CHARINDEX(' ',Games)-1) AS 'Year'
+	  ,RIGHT (Games, CHARINDEX(' ',REVERSE (Games))-1) AS 'Season'
+      ,[Games]
+      ,[City]
+      ,[Sport]
+      ,[Event]
+      ,CASE WHEN Medal = 'NA' THEN 'Not Registered' ELSE Medal END AS Medal
+  FROM [olympic_games].[dbo].[athletes_event_results]
+  WHERE RIGHT (Games, CHARINDEX(' ',REVERSE (Games))-1) = 'Summer';
+ 
